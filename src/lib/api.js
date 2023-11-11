@@ -36,8 +36,6 @@ export async function searchLaunches(query) {
   const url = new URL('launch', API_URL);
   url.searchParams.set('search', query);
   url.searchParams.set('mode', 'list');
-  console.log('Þetta er urlið');
-  console.log('Þetta er urlið >>>', url);
 
   let response;
   try {
@@ -73,11 +71,8 @@ export async function searchLaunches(query) {
  * @returns {Promise<LaunchDetail | null>} Geimskot.
  */
 export async function getLaunch(id) {
-  // TODO
   const url = new URL(`launch/${id}`, API_URL);
   let response;
-  // const url = new URL(`?${id}`, API_URL);
-  console.log('Þetta er id urlið', url);
   try {
     response = await fetch(url);
 
@@ -89,20 +84,7 @@ export async function getLaunch(id) {
       );
       return null;
     }
-
-    /* let json;
-  try {
-    json = await response.json();
-    console.log('API Response:', json);
-  } catch (e) {
-    console.error('Villa við að vinna úr JSON');
-    return null;
-  }
-  // console.log(json.mission.name);
-  return json.results; */
     const launchData = await response.json();
-
-    console.log('Launch Data:', launchData); // Log the data for debugging
 
     const launchDetail = {
       name: launchData.name ?? '',
@@ -111,12 +93,11 @@ export async function getLaunch(id) {
       window_start: launchData.window_start ?? '',
       window_end: launchData.window_end ?? '',
       image: launchData.image,
-      // Add other properties as needed
     };
 
     return launchDetail;
-  } catch (error) {
-    console.error('An error occurred while fetching data:', error);
+  } catch (e) {
+    console.error('Villa kom upp við að sækja gögn');
     return null;
   }
 }

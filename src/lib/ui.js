@@ -209,7 +209,7 @@ export async function renderDetails(parentElement, id) {
 
   const headerElement = el(
     'h1',
-    { class: 'launch_header', style: 'text-align: center;' },
+    { class: 'name_header', style: 'text-align: center;' },
     result.name
   );
 
@@ -223,7 +223,6 @@ export async function renderDetails(parentElement, id) {
   );
   container.appendChild(windowElement);
 
-  console.log(result.status.name);
   const statusElement = el(
     'div',
     { class: 'status' },
